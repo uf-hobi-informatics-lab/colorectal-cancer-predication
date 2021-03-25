@@ -3,12 +3,11 @@ import numpy as np
 import pandas as pd
 import pickle as pkl
 
-def pkl_dump(data, file):
-    with open(file, "wb") as fw:
-        pkl.dump(data, fw)
+def pkl_dump(data, file, output_path):
+    with open(output_path + file, "wb") as fw:
+        pkl.dump(data, fw, pkl.HIGHEST_PROTOCOL)
 
-        
-def pkl_load(file):
-    with open(file, "rb") as fr:
+def pkl_load(file, input_path):
+    with open(input_path + file, "rb") as fr:
         data = pkl.load(fr)
     return data
