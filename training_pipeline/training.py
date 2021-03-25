@@ -20,9 +20,9 @@ from datetime import datetime
 from utils import pkl_dump,pkl_load
 from config import ModelType
 
-def load_data(case_control_path,encoding_path,case_control_filename,features_filename,data_filename):
+def load_data(case_control_path,encoding_path,case_control_filename,encoding_filename,data_filename):
     ptIDs = pd.read_csv(f"{case_control_path}{case_control_filename}.csv",usecols=['PATID'],dtype =str)
-    fea2id, features = pkl_load(f"{encoding_path}{features_filename}.pkl")
+    fea2id, features = pkl_load(f"{encoding_path}{encoding_filename}.pkl")
     data = pkl_load(f"{case_control_filename}{data_filename}.pkl")
 
     return ptIDs,fea2id,data
@@ -107,7 +107,7 @@ def run_experiment(clf, params, tasks, nb, nit, model_type):
 def main(args):
 
     case_control_filename = args.case_control_filename
-    features_filename = args.features_filename
+    encoding_filename = args.encoding_filename
     data_filename = args.data_filename
     case_control_path = args.case_control_path
     encoding_path = args.encoding_path
@@ -125,7 +125,7 @@ def main(args):
                          n_jobs=10, 
                          scale_pos_Weight=4, use_missing=True)
 
-    ptIDs,fea2id,data = load_data(case_control_path,encoding_path,case_control_filename,features_filename,data_filename)
+    ptIDs,fea2id,data = load_data(case_control_path,encoding_path,case_control_filename,encoding_filename,data_filename)
 
     for i in tqdm(range(5)):
         train_id, test_id = train_test_split(ptIDs,test_size=0.2)
@@ -168,8 +168,8 @@ if __name__ == '__main__':
     parser.add_argument("--case_control_filename", required=True, type=str, 
         help="the case control filename")
 
-    # features_filename
-    parser.add_argument("--features_filename", required=True, type=str, 
+    # encoding_filename
+    parser.add_argument("--encoding_filename", required=True, type=str, 
         help="the features filename")
 
     # data_filename

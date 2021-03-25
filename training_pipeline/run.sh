@@ -50,5 +50,12 @@ lgb_tuned_parameters = {
     }
 
 python training.py \
-  --data_path '../model' \
-  --output_path '../model' \
+  --case_control_path '/data/datasets/chong/2021_CRC/psm_result' \
+  --case_control_filename 'matched_case_control_CC_01yr' \
+  --encoding_path '/data/datasets/chong/2021_CRC/encoding_files' \
+  --encoding_filename 'data_CC0yr_expr_features.pkl' \
+  --data_filename 'data_CC0yr_expr' \
+  --model_type 'lr' \
+  --predication_window [1] \
+  --number_of_jobs 10 \
+  --n_iterations 20 \
