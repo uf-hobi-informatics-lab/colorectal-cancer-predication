@@ -5,9 +5,11 @@ class ModelType(enum.Enum):
     M_LR = "lr"
     M_RF = "rf"
     M_SVM = 'svm'
-    M_LGBM = "lgbm"
+    M_GBDT = "gbdt"
 
-
+# Remove models with outlier for 100-interation test
+# Calculate SHAP values
+ 
 lr_tuned_parameters = {
     'max_iter': range(100, 4100, 500),
     'tol': [0.0001, 0.001, 0.01, 0.1],
@@ -16,23 +18,28 @@ lr_tuned_parameters = {
     'class_weight': [None, 'balanced']
     }
 
+# Remove models with outlier for 100-interation test
+# Calculate SHAP values
 rf_tuned_parameters = {
-     'min_samples_leaf': [12,14,16,18,20],
-     'max_depth': [28, 32, 36],
-     'n_estimators': range(1000, 1200, 50),
-     'min_weight_fraction_leaf': [1e-5],
-     'min_samples_split': [48,56,64,72,80],
-     'criterion': ["entropy"]
+    'n_estimators': range(10, 50, 10),
+    'max_depth': [28, 32, 36],
+    'min_samples_leaf': range(2, 12, 2),
+    'min_samples_split': [48,56,64,72,80],
+    'criterion': ["entropy"]
 }
 
+# Need to explore hyperparameter c and gamma.
+# Remove models with outlier for 100-interation test
+# Calculate SHAP values
 svm_tuned_parameters = {
-    'max_iter': range(100, 4100, 500),
-    'tol': [0.0001, 0.001, 0.01, 0.1],
+    'max_iter': range(100, 500, 50),
     'C': range(1, 50, 2),
     'class_weight': [None, 'balanced']
     }
 
-lgb_tuned_parameters = {
+# Remove models with outlier for 100-interation test
+# Calculate SHAP values
+gbdt_tuned_parameters = {
     'num_leaves': [2,4,8,16,32,64,80,96,128],
     'min_data_in_leaf': [2,8,16,32,64,128,256,512,1024],
     'max_depth': [-1, 8, 16, 32, 64],
