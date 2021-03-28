@@ -14,7 +14,7 @@ from common_utils.utils import pkl_dump,pkl_load
 from sklearn.model_selection import train_test_split
 
 def load_data(features_path,features_filename,data_filename):
-    fea2id = pkl_load(f"{features_filename}", features_path)
+    fea2id, features = pkl_load(f"{features_filename}", features_path)
     data = pkl_load(f"{data_filename}", features_path)
     return fea2id,data
 
