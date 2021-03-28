@@ -39,7 +39,9 @@ def main(args):
     output_path = args.output_path
 
     ptIDs,fea2id,patient_data = load_data(features_path,features_filename,data_filename)
+    print('Load Data Done!')
     patient_with_features = convert_to_dataframe(fea2id,patient_data)
+    print('Finished!')
     patient_with_features.to_csv(f"{output_path}/{data_filename}.csv", index=False)
 
 if __name__ == '__main__':
