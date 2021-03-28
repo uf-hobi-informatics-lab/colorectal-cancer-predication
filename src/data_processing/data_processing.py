@@ -61,3 +61,7 @@ if __name__ == '__main__':
     # output_path
     parser.add_argument("--output_path", required=True, type=str, 
         help="the output_path")
+
+    args = parser.parse_args()
+
+    main(args)
