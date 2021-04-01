@@ -19,15 +19,18 @@ def load_data(features_path,features_filename,data_filename):
     return fea2id,data
 
 def convert_to_dataframe(fea2id,patient_data):
-    patient_with_features = pd.DataFrame(columns = ['pid']+list(fea2id.values()))
+    patient_with_features_list=[]
 
     for i in range(len(patient_data)):
-        patient_with_features.loc[i,'pid']=patient_data[i][0]
+        temp=[patient_data[i][0],patient_data[i][1]]
         for j in range(1, len(fea2id)+1):
             if j in patient_data[i][1:]:
-                patient_with_features.loc[i,j]=1
+                temp.append(1)
             else:
-                patient_with_features.loc[i,j]=0
+                temp.append(0)
+        patient_with_features_list.append(temp)
+
+    patient_with_features = pd.DataFrame(patient_with_features_list, columns = ['pid','outcome']+list(fea2id.keys()))
     return patient_with_features
 
 def main(args):
